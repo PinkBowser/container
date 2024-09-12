@@ -1,12 +1,44 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: lucas
+  name: my-service
+  labels:
+    app: lucas-container
 spec:
-  type: ClusterIP
   selector:
-    app: lucas-deployment
+    app: lucas-container
   ports:
-    protocol: TCP
-    port: 80
-    targetPort: 8080
+    - protocol: TCP
+      port: 80         # De poort waarop de service beschikbaar is
+  type: LoadBalancer      # Dit geeft aan dat het een ClusterIP service is (standaard)
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: lucas
+#   labels:
+#     app: lucas-container
+# spec:
+#   selector:
+#     app: lucas-container
+#   ports:
+#     - protocol: TCP
+#       port: 80         # De poort waarop de service beschikbaar is
+#       targetPort: 80   # De poort waarop de applicatie in de pod draait
+#       nodePort: 30007
+#   type: NodePort      # Dit geeft aan dat het een ClusterIP service is (standaard)
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: my-service
+#   labels:
+#     app: lucas-container
+# spec:
+#   selector:
+#     app: lucas-container
+#   ports:
+#     - protocol: TCP
+#       port: 80         # De poort waarop de service beschikbaar is
+#       targetPort: 80   # De poort waarop de applicatie in de pod draait
+#   type: ClusterIP      # Dit geeft aan dat het een ClusterIP service is (standaard)
